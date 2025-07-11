@@ -4,11 +4,15 @@ services:
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: >
-      echo "📦 Haciendo migraciones..." &&
-      python manage.py makemigrations &&
-      python manage.py migrate &&
-      echo "✅ Migraciones aplicadas" &&
-      gunicorn config.wsgi:application
+      bash -c "
+        echo '📦 Ejecutando makemigrations...' &&
+        python manage.py makemigrations &&
+        echo '✅ Makemigrations hecho' &&
+        echo '📦 Ejecutando migrate...' &&
+        python manage.py migrate &&
+        echo '✅ Migraciones aplicadas' &&
+        gunicorn config.wsgi:application
+      "
     envVars:
       - key: DEBUG
         value: False
