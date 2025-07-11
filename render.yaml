@@ -3,16 +3,7 @@ services:
     name: crm-agricola
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: >
-      bash -c "
-        echo '📦 Ejecutando makemigrations...' &&
-        python manage.py makemigrations &&
-        echo '✅ Makemigrations hecho' &&
-        echo '📦 Ejecutando migrate...' &&
-        python manage.py migrate &&
-        echo '✅ Migraciones aplicadas' &&
-        gunicorn config.wsgi:application
-      "
+    startCommand: bash setup.sh
     envVars:
       - key: DEBUG
         value: False
