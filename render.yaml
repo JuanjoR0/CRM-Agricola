@@ -3,7 +3,7 @@ services:
     name: crm-agricola
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: bash setup.sh
+    startCommand: ./setup.sh
     envVars:
       - key: DEBUG
         value: False
