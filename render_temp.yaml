@@ -13,3 +13,5 @@ services:
         value: crm-agricola.onrender.com
       - key: DJANGO_SETTINGS_MODULE
         value: config.settings
+      - key: RENDER_EXTERNAL_HOSTNAME
+        value: crm-agricola.onrender.com
