@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>🗑️ Eliminar Interacción</h2>
+<p>¿Seguro que deseas eliminar la interacción con <strong>{{ object.client }}</strong> del <strong>{{ object.date }}</strong>?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+  <a href="{% url 'interaction-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+{% endblock %}

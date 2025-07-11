@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>🗑️ Eliminar Producto</h2>
+<p>¿Seguro que deseas eliminar el producto <strong>{{ object.name }}</strong>?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Eliminar</button>
+  <a href="{% url 'product-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+{% endblock %}

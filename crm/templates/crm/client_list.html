@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-top:50px;"> Lista de Clientes</h2>
+
+
+<div class="d-flex justify-content-between align-items-center mb-3" style="margin-top:30px;">
+  <div>
+    {% if request.user.userprofile.role in 'superadmin supervisor vendedor' %}
+      <a href="{% url 'client-create' %}" class="btn btn-success me-2">➕ Nuevo cliente</a>
+    {% endif %}
+    
+    {% if request.user.userprofile.role in 'superadmin supervisor vendedor' %}
+      <a class="btn btn-primary" href="{% url 'export-csv' %}">📤 Exportar a CSV</a>
+    {% endif %}
+  </div>
+
+ 
+  <form method="get" class="d-flex">
+    <input type="text" name="q" placeholder="Escribe nombre, email o empresa" class="form-control me-2"
+         style="padding-top: 0.25rem; padding-bottom: 0.25rem; font-size: 0.875rem; height: calc(1.5em + 0.5rem + 2px);"   value="{{ request.GET.q }}">
+    <button type="submit" class="btn btn-outline-success" style="padding-top: 0.25rem; padding-bottom: 0.25rem; font-size: 0.875rem; height: calc(1.5em + 0.5rem + 2px);">Buscar</button>
+  </form>
+</div>
+
+
+<table class="table table-bordered table-hover">
+  <thead class="table-light">
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Zona</th>
+      <th>Cultivo</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Empresa</th>
+      <th>Vendedor</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for client in clients %}
+      <tr>
+        <td>{{ client.name }}</td>
+        <td>{{ client.get_client_type_display }}</td>
+        <td>{{ client.region }}</td>
+        <td>{{ client.get_main_crop_display }}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.phone }}</td>
+        <td>{{ client.company }}</td>
+        <td>{{ client.assigned_salesperson }}</td>
+        <td>
+          {% if request.user.userprofile.role in 'superadmin supervisor' or client.assigned_salesperson == request.user %}
+            <a href="{% url 'client-update' client.pk %}" class="btn btn-warning" style="padding-left: 0.2rem; padding-right: 0.2rem;">✏️</a>
+            <a href="{% url 'client-delete' client.pk %}" class="btn btn-danger" style="padding-left: 0.2rem; padding-right: 0.2rem;">🗑️</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="9" class="text-center text-muted">
+          {% if request.GET.q %}
+            No se encontraron resultados para "{{ request.GET.q }}".
+          {% else %}
+            No hay clientes disponibles.
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

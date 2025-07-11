@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-5">
+  <div class="row justify-content-center align-items-start g-5">
+
+    
+    <div class="col-lg-7">
+      <div class="card shadow-sm border-0 rounded-4 h-100">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">📘 Instrucciones del Proyecto</h2>
+          <p>
+            Este proyecto es un <strong>CRM Agrícola</strong> que permite a una empresa del sector gestionar de forma eficiente sus relaciones con clientes, empresas y productos, facilitando el seguimiento de interacciones y el análisis de datos.
+          </p>
+          <p>
+            Está diseñado para que distintos tipos de usuarios (superadministradores, supervisores y vendedores) puedan trabajar colaborativamente, respetando niveles de permisos según su rol.
+          </p>
+
+          <h4 class="mt-4">🧩 Tecnologías Utilizadas</h4>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">Backend: <strong>Python + Django</strong></li>
+            <li class="list-group-item">Frontend: <strong>HTML5, CSS3, Bootstrap, JavaScript, Chart.js</strong></li>
+            <li class="list-group-item">Base de Datos: <strong>SQLite3</strong></li>
+          </ul>
+
+          <h4 class="mt-4">👤 Usuarios de Prueba</h4>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Superadmin:</strong> Juanjo</li>
+            <li class="list-group-item"><strong>Supervisor:</strong> Supervisor1</li>
+            <li class="list-group-item"><strong>Vendedores:</strong> Vendedor1, Vendedor2</li>
+            <li class="list-group-item"><strong>Contraseña para todos:</strong> usuario1234</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+   
+    <div class="col-lg-5">
+      <div class="card p-4 shadow border-0 rounded-4">
+        <h2 class="text-center mb-4">🌾 CRM Agrícola</h2>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+              {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+
+          <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+          </div>
+          <div class="mb-3">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success">Entrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

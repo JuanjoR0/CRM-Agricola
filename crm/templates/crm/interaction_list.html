@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-top:50px;">Lista de Interacciones</h2>
+
+<div class="d-flex justify-content-between align-items-center mb-3" style="margin-top:30px;">
+ 
+  <div class="d-flex gap-2">
+    <a href="{% url 'interaction-create' %}" class="btn btn-success">➕ Nueva Interacción</a>
+    {% if request.user.userprofile.role in 'superadmin supervisor vendedor' %}
+      <a class="btn btn-primary" href="{% url 'export-interactions-csv' %}">📤 Exportar a CSV</a>
+    {% endif %}
+  </div>
+
+
+  <form method="get" class="d-flex">
+    <input type="text" name="q" placeholder="Escribe nombre, email o empresa" class="form-control me-2"
+      style="padding-top: 0.25rem; padding-bottom: 0.25rem; font-size: 0.875rem; height: calc(1.5em + 0.5rem + 2px);" 
+      value="{{ request.GET.q }}">
+    <button type="submit" class="btn btn-outline-success"
+      style="padding-top: 0.25rem; padding-bottom: 0.25rem; font-size: 0.875rem; height: calc(1.5em + 0.5rem + 2px);">
+       Buscar
+    </button>
+  </form>
+</div>
+
+
+
+<table class="table table-bordered table-hover">
+  <thead class="table-light">
+    <tr>
+      <th>Cliente</th>
+      <th>Fecha</th>
+      <th>Tipo</th>
+      <th>Vendedor</th>
+      <th>Nota</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for interaction in interactions %}
+    <tr>
+      <td>{{ interaction.client }}</td>
+      <td>{{ interaction.date }}</td>
+      <td>{{ interaction.get_interaction_type_display }}</td>
+      <td>{{ interaction.user }}</td>
+      <td>{{ interaction.note|truncatechars:60 }}</td>
+      <td>
+        {% if interaction.user == request.user or request.user.userprofile.role in 'superadmin supervisor' %}
+          <a href="{% url 'interaction-update' interaction.pk %}" class="btn btn-warning btn-sm">✏️</a>
+          <a href="{% url 'interaction-delete' interaction.pk %}" class="btn btn-danger btn-sm">🗑️</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="6" class="text-center text-muted">No hay interacciones para mostrar.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

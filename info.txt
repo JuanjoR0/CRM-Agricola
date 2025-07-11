@@ -1,0 +1,13 @@
+Pasos realizados;
+1.Configurar el entorno de desarrollo
+2.Crear entorno virtual, instalar Django, y configurar Visual Studio Code. ( Crear el proyecto y la app Django)
+3.Agregar la app crm al settings.py y configurar urls.py.
+5.Definir los modelos
+6.Ejecutar migraciones y crear superusuario
+7.Registrar modelos en el admin. Hacer que los modelos sean accesibles desde el panel admin.
+8.Crear roles de usuario y asignar permisos oportunos
+9.Crear las vistas (CRUD)
+10.Crear las plantillas HTML para listar, crear, editar y eliminar clientes/interacciones.
+11.Exportar datos a CSV
+12.Implementar Buscador por nombre, email o empresa
+13.Mostrar gráficos de interacciones, clientes por empresa, etc.

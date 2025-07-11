@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+  <div class="card shadow-sm p-4" style="max-width: 600px; width: 100%;">
+    <h4 class="mb-4 text-center">
+      {% if object %}✏️ Editar Empresa{% else %}➕ Nueva Empresa{% endif %}
+    </h4>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="d-flex justify-content-between mt-3">
+        <a href="{% url 'company-list' %}" class="btn btn-secondary">⬅️ Volver</a>
+        <button type="submit" class="btn btn-primary">💾 Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

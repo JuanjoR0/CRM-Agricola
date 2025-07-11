@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-top:50px;"> Lista de Productos</h2>
+
+<div class="d-flex justify-content-between align-items-center mb-3" style="margin-top:30px;">
+ 
+  <a href="{% url 'product-create' %}" class="btn btn-success">➕ Nuevo Producto</a>
+
+ 
+  <form method="get" class="d-flex">
+    <input type="text" name="q" placeholder="Escribe nombre, email o empresa" class="form-control me-2"
+         style="padding-top: 0.25rem; padding-bottom: 0.25rem; font-size: 0.875rem; height: calc(1.5em + 0.5rem + 2px);"   value="{{ request.GET.q }}">
+    <button type="submit" class="btn btn-outline-success" style="padding-top: 0.25rem; padding-bottom: 0.25rem; font-size: 0.875rem; height: calc(1.5em + 0.5rem + 2px);">Buscar</button>
+  </form>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-light">
+    <tr>
+      <th>Nombre</th>
+      <th>Categoría</th>
+      <th>Unidad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td>{{ product.category }}</td>
+      <td>{{ product.unit_of_measurement }}</td>
+      <td>
+        <a href="{% url 'product-update' product.pk %}" class="btn btn-warning btn-sm">✏️</a>
+        <a href="{% url 'product-delete' product.pk %}" class="btn btn-danger btn-sm">🗑️</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4" class="text-center text-muted">
+        {% if request.GET.q %}
+          No se encontraron productos que coincidan con "{{ request.GET.q }}".
+        {% else %}
+          No hay productos registrados.
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
