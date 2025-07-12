@@ -1,3 +1,7 @@
+https://crm-agricola.onrender.com/
+usuario1234
+
+
 Pasos realizados;
 1.Configurar el entorno de desarrollo
 2.Crear entorno virtual, instalar Django, y configurar Visual Studio Code. ( Crear el proyecto y la app Django)

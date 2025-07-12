@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'crm',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
