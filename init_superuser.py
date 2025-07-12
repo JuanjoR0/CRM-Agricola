@@ -83,7 +83,7 @@ for nombre in empresa_nombres:
         defaults={
             "description": f"Compañía agrícola especializada en {nombre.split()[0]}",
             "country": "España",
-            "phone": f"+34 955 000 0{random.randint(10,99)}",
+            "phone": f"955 000 0{random.randint(10,99)}",
             "email": f"contacto@{nombre.replace(' ', '').lower()}.com"
         }
     )
@@ -113,7 +113,7 @@ for data in clientes_info:
             "region": data["region"],
             "main_crop": data["crop"],
             "email": data["email"],
-            "phone": f"+34 611 {random.randint(100000, 999999)}",
+            "phone": f"611 {random.randint(100000, 999999)}",
             "company": random.choice(empresas),
             "assigned_salesperson": random.choice(usuarios_creados),
         }
